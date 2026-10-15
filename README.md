@@ -1,30 +1,48 @@
-# Secure releases
+﻿# Secure Legion Releases
 
-Official installers, release notes, and SHA-256 checksums for Secure.
+Official distribution channel for approved Secure application builds.
 
-Open [Releases](https://github.com/Secure-Legion/releases/releases) and choose the
-release for your device. Windows releases use `desktop-` tags. Mobile releases
-can use their own platform tags in this same repository.
+Secure is a private messaging application that uses Tor onion services. This repository is reserved for installers, release notes, checksums, and update metadata. Application development is maintained separately by the Secure Legion team.
 
-For the Windows beta, download the `.msi` file. Current beta installers are
-unsigned. Windows may display a publisher warning. Verify the file checksum
-against its matching `.msi.sha256` asset before installing. Keep Windows security
-protections enabled. The Windows installer preserves your account and messages
-during upgrades and uninstall.
+> **Release status:** Public downloads are paused while the team completes internal testing. The previous desktop beta has been withdrawn. A replacement will be published here after approval.
+
+## Availability
+
+| Platform | Status |
+| --- | --- |
+| Windows x64 | Internal beta testing; no public installer currently available |
+| Android | Release information will be added when approved |
+| iOS | Release information will be added when approved |
+
+When a release is ready, its notes will identify the supported platform, version, compatibility requirements, installation instructions, and known limitations. Do not install an old build from an unofficial mirror as a substitute for an approved release.
+
+## What an approved Windows release includes
+
+- A Windows x64 `.msi` installer.
+- A matching SHA-256 checksum file.
+- Versioned update metadata and a file manifest.
+- Release notes and installation instructions.
+
+Download the installer and its verification files from the **same release**. Confirm the filename, version, and signing status against that release's notes.
 
 ```powershell
-Get-FileHash -Algorithm SHA256 -LiteralPath '.\Secure-<version>-windows-x64-unsigned.msi'
+Get-FileHash -Algorithm SHA256 -LiteralPath '.\Secure-<version>-windows-x64.msi'
 ```
 
-Secure's desktop updater checks this repository through Tor. It downloads an
-update only when you choose to, checks its SHA-256, and verifies the MSI's Secure
-product identity and version before installation. You can also use
-**Help > Check for updates** in the application.
+Compare the complete hash with the matching checksum. SHA-256 detects a changed or incomplete download; a checksum alone does not prove publisher authenticity. Follow the release's signature-verification instructions and keep Windows security protections enabled. An unsigned test build must be explicitly labeled as such.
 
-Each Windows release includes the installer, its SHA-256 checksum, a small
-`.update.json` for the updater, a per-file release manifest, and beta instructions.
-SHA-256 checks detect changed or incomplete downloads; they do not replace
-publisher code signing. The updater currently supports the Windows x64 beta.
+## Installation and account data
 
-This repository distributes releases and contains no application source code or
-user account data. Mobile packages will appear when their releases are ready.
+The Windows installer includes a visible setup flow and terms acceptance. Upgrades preserve the existing account. Full uninstall removes local account data by default; selecting **Keep my data** preserves it for reinstallation.
+
+Application erasure cannot remove copies held in backups, filesystem snapshots, or other locations. Review a release's data-handling notes before installing or uninstalling it.
+
+## Updates
+
+Supported Secure Desktop builds check this repository through Tor and offer available updates in the application. Downloading and installing requires the user's choice. Update availability depends on an approved release being published; the absence of a public release is expected during internal testing.
+
+## Reporting issues
+
+Use the reporting channel supplied with your approved build. Include the application version, operating system, and steps to reproduce the problem. Share sensitive security reports privately with the Secure Legion maintainers. Never post recovery phrases, private keys, invitation credentials, message databases, or personal conversations in public issues.
+
+This repository does not collect user account data and is not a messaging relay.
